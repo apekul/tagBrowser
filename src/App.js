@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import Navigation from "./Components/Navigation";
 import TagList from "./Components/TagList";
-
+import { Box, Typography, Container } from "@mui/material";
 // https://api.stackexchange.com/2.3/tags?order=desc&sort=popular&site=stackoverflow
 function App() {
   const data = {
@@ -27,11 +27,24 @@ function App() {
     quota_remaining: 9963,
   };
   return (
-    <div className="App">
-      <h1>Tag browser</h1>
-      <Navigation />
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "flex-start",
+        backgroundColor: "#f5f5f5",
+        flexDirection: "column",
+        height: "100vh",
+        marginX: "25em",
+      }}
+    >
+      <Typography variant="h4" component="h1" gutterBottom>
+        Tag browser
+      </Typography>
+      <Box sx={{ width: "100%" }}>
+        <Navigation />
+      </Box>
       <TagList data={data} />
-    </div>
+    </Box>
   );
 }
 

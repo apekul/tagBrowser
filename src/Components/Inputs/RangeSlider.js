@@ -1,7 +1,5 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
-import Slider from "@mui/material/Slider";
-
+import { Box, Typography, Slider } from "@mui/material";
 export default function RangeSlider() {
   const [value, setValue] = React.useState([0, 999]);
 
@@ -10,10 +8,12 @@ export default function RangeSlider() {
   };
 
   return (
-    <Box sx={{ width: 300 }}>
-      <p>Min/Max count</p>
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <p style={{ marginRight: "1rem", width: "2rem" }}>min {value[0]}</p>
+    <Box sx={{ width: "100%", p: 1 }}>
+      <Typography variant="subtitle1">Min/Max count</Typography>
+      <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+        <Typography variant="body2" sx={{ width: "2rem" }}>
+          min {value[0]}
+        </Typography>
         <Slider
           getAriaLabel={() => "Temperature range"}
           value={value}
@@ -21,9 +21,12 @@ export default function RangeSlider() {
           valueLabelDisplay="auto"
           min={0}
           max={999}
+          sx={{ flex: 1 }}
         />
-        <p style={{ marginLeft: "1rem", width: "2rem" }}>max {value[1]}</p>
-      </div>
+        <Typography variant="body2" sx={{ width: "2rem" }}>
+          max {value[1]}
+        </Typography>
+      </Box>
     </Box>
   );
 }
