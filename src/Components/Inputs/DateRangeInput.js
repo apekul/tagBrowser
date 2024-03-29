@@ -21,7 +21,7 @@ const DateRangeInput = ({ setDateRange }) => {
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
-      <Typography variant="subtitle1">Date Range</Typography>
+      {/* <Typography variant="subtitle1">Date Range</Typography> */}
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DemoContainer components={["DatePicker"]}>
           <DatePicker

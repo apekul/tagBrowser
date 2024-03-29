@@ -1,6 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Typography, Pagination } from "@mui/material";
+import PageItemNum from "./Inputs/PageItemNum";
+
 const TagList = ({ data }) => {
+  const [pageItems, setPageItems] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const handleChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
+  const startIndex = (currentPage - 1) * pageItems;
+  const endIndex = startIndex + pageItems;
+  const itemsOnPage = data.items.slice(startIndex, endIndex);
   return (
     <Box
       sx={{
@@ -13,10 +25,16 @@ const TagList = ({ data }) => {
       }}
     >
       <Box sx={{ overflowY: "auto", maxHeight: "calc(100vh - 100px)" }}>
-        <Typography variant="subtitle1" gutterBottom>
-          How many items to display selection
-        </Typography>
-        {data.items.map((item, index) => (
+        <Box
+          sx={{
+            mt: 2,
+            display: "flex",
+            justifyContent: "flex-end",
+          }}
+        >
+          <PageItemNum pageItems={pageItems} setPageItems={setPageItems} />
+        </Box>
+        {itemsOnPage.map((item, index) => (
           <Box
             key={index}
             sx={{
@@ -35,9 +53,11 @@ const TagList = ({ data }) => {
       </Box>
       {/* Pagination */}
       <Pagination
-        count={10}
+        count={Math.ceil(data.items.length / pageItems)}
         color="primary"
         sx={{ mt: 2, alignSelf: "center" }}
+        onChange={handleChange}
+        page={currentPage}
       />
     </Box>
   );
