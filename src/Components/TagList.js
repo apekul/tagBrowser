@@ -1,18 +1,13 @@
-import React, { useState } from "react";
-import { Box, Typography, Pagination } from "@mui/material";
+import React from "react";
+import { Box, Pagination, Grid, ListItem, ListItemText } from "@mui/material";
 import PageItemNum from "./Inputs/PageItemNum";
+import randomColor from "randomcolor";
 
-const TagList = ({ data }) => {
-  const [pageItems, setPageItems] = useState(10);
-  const [currentPage, setCurrentPage] = useState(1);
-
+const TagList = ({ items, page, setPage, pageSize, setPageSize, hasMore }) => {
   const handleChange = (event, value) => {
-    setCurrentPage(value);
+    setPage(value);
   };
 
-  const startIndex = (currentPage - 1) * pageItems;
-  const endIndex = startIndex + pageItems;
-  const itemsOnPage = data.items.slice(startIndex, endIndex);
   return (
     <Box
       sx={{
@@ -24,40 +19,46 @@ const TagList = ({ data }) => {
         justifyContent: "space-between",
       }}
     >
-      <Box sx={{ overflowY: "auto", maxHeight: "calc(100vh - 100px)" }}>
-        <Box
-          sx={{
-            mt: 2,
-            display: "flex",
-            justifyContent: "flex-end",
-          }}
-        >
-          <PageItemNum pageItems={pageItems} setPageItems={setPageItems} />
-        </Box>
-        {itemsOnPage.map((item, index) => (
-          <Box
-            key={index}
-            sx={{
-              p: 1,
-              m: 1,
-              borderRadius: 1,
-              border: "1px solid grey",
-              display: "inline-block",
-            }}
-          >
-            <Typography variant="body1">
-              {item.name} ({item.count} posts)
-            </Typography>
-          </Box>
-        ))}
+      <Box>
+        {/* item list */}
+        <Grid container spacing={1}>
+          {items.map((item, index) => (
+            <Grid item xs={12} sm={6} md={4} key={index}>
+              <ListItem
+                sx={{
+                  borderRadius: 1,
+                  border: "1px solid grey",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  backgroundColor: randomColor({ luminosity: "light" }),
+                  color: "#333",
+                  fontWeight: "bold",
+                  fontSize: "0.875rem",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.05em",
+                  cursor: "pointer",
+                  transition: "all 0.3s ease",
+                  "&:hover": {
+                    backgroundColor: "#e0e0e0",
+                  },
+                }}
+              >
+                <ListItemText primary={`${item.name} (${item.count} posts)`} />
+              </ListItem>
+            </Grid>
+          ))}
+        </Grid>
       </Box>
+
       {/* Pagination */}
       <Pagination
-        count={Math.ceil(data.items.length / pageItems)}
+        // count={Math.ceil(data.length / pageItems)}
+        count={hasMore ? page + 1 : page}
         color="primary"
         sx={{ mt: 2, alignSelf: "center" }}
         onChange={handleChange}
-        page={currentPage}
+        page={page}
       />
     </Box>
   );

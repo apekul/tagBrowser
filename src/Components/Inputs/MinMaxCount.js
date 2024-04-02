@@ -1,15 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, TextField } from "@mui/material";
 
-export default function MinMaxCount({ minMaxCount, setMinMaxCount }) {
-  const [value, setValue] = useState([0, 999]);
+export default function MinMaxCount({ min, max, setMin, setMax }) {
+  const [minCount, setMinCount] = useState(min);
+  const [maxCount, setMaxCount] = useState(max);
 
-  const handleChange = (event) => {
-    setValue({
-      ...value,
-      [event.target.name]: event.target.value,
-    });
-  };
+  useEffect(() => {
+    setMin(minCount);
+    setMax(maxCount);
+  }, [minCount, maxCount, setMin, setMax]);
 
   return (
     <Box
@@ -21,16 +20,16 @@ export default function MinMaxCount({ minMaxCount, setMinMaxCount }) {
         <TextField
           name="min"
           label="Min count"
-          value={value.min}
-          onChange={handleChange}
+          value={minCount !== null ? minCount : ""}
+          onChange={(event) => setMinCount(event.target.value)}
           type="number"
           sx={{ width: "50%" }}
         />
         <TextField
           name="max"
           label="Max count"
-          value={value.max}
-          onChange={handleChange}
+          value={maxCount !== null ? maxCount : ""}
+          onChange={(event) => setMaxCount(event.target.value)}
           type="number"
           sx={{ width: "50%" }}
         />

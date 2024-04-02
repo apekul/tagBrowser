@@ -3,7 +3,7 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 
 const DateRangeInput = ({ setDateRange }) => {
   const [fromDate, setFromDate] = useState(null);
@@ -21,12 +21,12 @@ const DateRangeInput = ({ setDateRange }) => {
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
-      {/* <Typography variant="subtitle1">Date Range</Typography> */}
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DemoContainer components={["DatePicker"]}>
           <DatePicker
             label="from Date"
             value={fromDate}
+            maxDate={toDate}
             onChange={(newValue) => {
               setFromDate(newValue);
             }}
@@ -34,6 +34,7 @@ const DateRangeInput = ({ setDateRange }) => {
           <DatePicker
             label="to Date"
             value={toDate}
+            minDate={fromDate}
             onChange={(newValue) => {
               setToDate(newValue);
             }}

@@ -16,9 +16,6 @@ const Sort = ({ setSortBy, sortBy }) => {
           label="Sort by"
           onChange={handleChange}
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
           <MenuItem value="popular">popular</MenuItem>
           <MenuItem value="activity">activity</MenuItem>
           <MenuItem value="name">name</MenuItem>
