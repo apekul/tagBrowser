@@ -19,6 +19,11 @@ React app for searching and navigating tags with pagination. It handles various 
 
 ## Usage
 
+Initialize project
+```shell
+npm ci
+```
+
 To start the application
 
 ```shell
