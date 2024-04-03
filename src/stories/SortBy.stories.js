@@ -21,6 +21,7 @@ export default {
     sortBy: {
       control: "select",
       options: ["popular", "activity", "name"],
+      description: "The field to sort by.",
     },
   },
 };

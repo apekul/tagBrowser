@@ -19,8 +19,16 @@ export default {
     toDate: null,
   },
   argTypes: {
-    fromDate: { control: "date" },
-    toDate: { control: "date" },
+    fromDate: {
+      control: "date",
+      type: { name: "date", required: false },
+      description: "The start date for the range.",
+    },
+    toDate: {
+      control: "date",
+      type: { name: "date", required: false },
+      description: "The end date for the range.",
+    },
   },
 };
 

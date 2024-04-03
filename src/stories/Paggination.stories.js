@@ -15,6 +15,12 @@ export default {
   args: {
     page: 1,
   },
+  argTypes: {
+    page: {
+      control: "number",
+      description: "The current page number.",
+    },
+  },
 };
 
 const Template = (args) => {

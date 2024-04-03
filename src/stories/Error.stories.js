@@ -19,8 +19,14 @@ export default {
     errorText: "HTTP error! status: 400",
   },
   argTypes: {
+    error: { control: "boolean" },
+    errorText: {
+      control: "text",
+      description: "The error message to display.",
+    },
     status: {
       control: "select",
+      description: "Status of the operation.",
       options: ["idle", "loading", "succeeded"],
     },
   },

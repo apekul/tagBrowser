@@ -16,6 +16,11 @@ export default {
   args: {
     inname: "",
   },
+  argTypes: {
+    inname: {
+      description: "Name to search for.",
+    },
+  },
 };
 
 const Template = (args) => {

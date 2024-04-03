@@ -27,18 +27,40 @@ export default {
     max: null,
   },
   argTypes: {
-    fromDate: { control: "date" },
-    toDate: { control: "date" },
+    inname: {
+      control: "text",
+      description: "Name to filter the tags by.",
+    },
+    fromDate: {
+      control: "date",
+      type: { name: "date", required: false },
+      description: "Start date for the range.",
+    },
+    toDate: {
+      control: "date",
+      type: { name: "date", required: false },
+      description: "End date for the range.",
+    },
     sortBy: {
       control: "select",
       options: ["popular", "activity", "name"],
+      description: "Field to sort the tags by.",
     },
     order: {
       control: "select",
       options: ["desc", "asc"],
+      description: "Order to sort the tags in.",
     },
-    min: { control: "number" },
-    max: { control: "number" },
+    min: {
+      control: "number",
+      type: { name: "number", required: false },
+      description: "Minimum value for the range.",
+    },
+    max: {
+      control: "number",
+      type: { name: "number", required: false },
+      description: "Maximum value for the range.",
+    },
   },
 };
 

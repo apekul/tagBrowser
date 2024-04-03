@@ -21,6 +21,7 @@ export default {
     pageSize: {
       control: "select",
       options: [20, 30, 40, 50],
+      description: "Number of items to display per page.",
     },
   },
 };

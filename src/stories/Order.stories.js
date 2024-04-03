@@ -21,6 +21,7 @@ export default {
     order: {
       control: "select",
       options: ["desc", "asc"],
+      description: "Order to sort by.",
     },
   },
 };

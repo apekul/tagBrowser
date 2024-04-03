@@ -19,8 +19,16 @@ export default {
     max: null,
   },
   argTypes: {
-    min: { control: "number" },
-    max: { control: "number" },
+    min: {
+      control: "number",
+      type: { name: "number", required: false },
+      description: "The minimum value for the range.",
+    },
+    max: {
+      control: "number",
+      type: { name: "number", required: false },
+      description: "The maximum value for the range.",
+    },
   },
 };
 

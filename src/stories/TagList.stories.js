@@ -26,15 +26,24 @@ export default {
     errorText: "HTTP error! status: 400",
   },
   argTypes: {
+    page: {
+      control: "number",
+      description: "Current page number.",
+    },
     pageSize: {
       control: "select",
       options: [20, 30, 40, 50],
+      description: "Number of items to display per page.",
     },
     status: {
       control: "select",
       options: ["idle", "loading", "succeeded"],
+      description: "Current status of the component.",
     },
-    items: { control: "object" },
+    items: {
+      control: "object",
+      description: "List of items to display.",
+    },
   },
 };
 
