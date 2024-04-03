@@ -20,6 +20,17 @@ const TagList = ({ items, page, setPage, pageSize, setPageSize, hasMore }) => {
       }}
     >
       <Box>
+        {/* Items per Page */}
+        <Box
+          sx={{
+            width: "100%",
+            display: "flex",
+            mb: 2,
+            justifyContent: "flex-end",
+          }}
+        >
+          <PageItemNum pageSize={pageSize} setPageSize={setPageSize} />
+        </Box>
         {/* item list */}
         <Grid container spacing={1}>
           {items.map((item, index) => (

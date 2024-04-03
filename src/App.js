@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Navigation from "./Components/Navigation";
+import FilterSortControls from "./Components/FilterSortControls";
 import TagList from "./Components/TagList";
 import { Box, CircularProgress, Alert, Typography } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchData } from "./redux/dataSlice";
-import PageItemNum from "./Components/Inputs/PageItemNum";
+// import PageItemNum from "./Components/Inputs/PageItemNum";
 function App() {
   const dispatch = useDispatch();
   const items = useSelector((state) => state.data.items);
@@ -15,7 +15,7 @@ function App() {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
 
-  const [inname, setInName] = useState("");
+  const [inname, setInname] = useState("");
   const [dateRange, setDateRange] = useState({ fromDate: null, toDate: null });
   const [sortBy, setSortBy] = useState("popular");
   const [order, setOrder] = useState("desc");
@@ -69,10 +69,10 @@ function App() {
       }}
     >
       <Box sx={{ width: "100%" }}>
-        <Navigation
+        <FilterSortControls
           handleSearch={handleSearch}
           inName={inname}
-          setInName={setInName}
+          setInname={setInname}
           dateRange={dateRange}
           setDateRange={setDateRange}
           sortBy={sortBy}
@@ -106,7 +106,7 @@ function App() {
             {status === "loading" && <CircularProgress />}
             {error && <Alert severity="error">{error}</Alert>}
           </Box>
-          <PageItemNum pageSize={pageSize} setPageSize={setPageSize} />
+          {/* <PageItemNum pageSize={pageSize} setPageSize={setPageSize} /> */}
         </Box>
       </Box>
       <TagList

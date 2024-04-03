@@ -3,7 +3,7 @@ import { Box, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 
 const PageItemNum = ({ pageSize, setPageSize }) => {
   const handleChange = (event) => {
-    setPageSize(event.target.value);
+    setPageSize(Number(event.target.value));
   };
   return (
     <Box sx={{ width: 110 }}>
