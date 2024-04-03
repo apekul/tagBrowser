@@ -33,7 +33,7 @@ const TagList = ({
       setShowSuccess(true);
       const timeoutId = setTimeout(() => {
         setShowSuccess(false);
-      }, 5000);
+      }, 1000);
 
       return () => clearTimeout(timeoutId);
     }
