@@ -22,11 +22,11 @@ React app for searching and navigating tags with pagination. It handles various 
 To start the application
 
 ```shell
-yarn start
+npm start
 ```
  To view the components in Storybook
  ```shell
-yarn run storybook
+npm run storybook
 ```
 ## Screenshots
 
