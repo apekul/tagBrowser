@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import TagList from "../Components/TagList";
-import { Box } from "@mui/material";
 
 export default {
   title: "TagList",
   component: TagList,
   tags: ["autodocs"],
   parameters: {
+    layout: "centered",
     docs: {
       description: {
         component:
-          "This is a component for displaying a list of tags with pagination.",
+          "TagList component is used to display a list of tags with pagination. It supports different states such as idle, loading, and succeeded. It also handles errors and displays an error message when an error occurs.",
       },
     },
   },
@@ -21,12 +21,20 @@ export default {
     })),
     page: 1,
     pageSize: 10,
+    status: "idle",
+    error: false,
+    errorText: "HTTP error! status: 400",
   },
   argTypes: {
     pageSize: {
       control: "select",
       options: [20, 30, 40, 50],
     },
+    status: {
+      control: "select",
+      options: ["idle", "loading", "succeeded"],
+    },
+    items: { control: "object" },
   },
 };
 
@@ -47,25 +55,17 @@ const Template = (args) => {
   }, [args.page, args.pageSize]);
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        // backgroundColor: "#f5f5f5",
-        flexDirection: "column",
-        pt: 2,
-        px: 2,
-      }}
-    >
-      <TagList
-        {...args}
-        items={items}
-        page={page}
-        setPage={setPage}
-        pageSize={pageSize}
-        setPageSize={setPageSize}
-        hasMore={allItems.length > page * pageSize}
-      />
-    </Box>
+    <TagList
+      {...args}
+      items={items}
+      page={page}
+      setPage={setPage}
+      pageSize={pageSize}
+      setPageSize={setPageSize}
+      hasMore={allItems.length > page * pageSize}
+      isLoading={args.isLoading}
+      error={args.error && args.errorText}
+    />
   );
 };
 

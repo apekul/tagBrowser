@@ -1,31 +1,35 @@
 import React, { useEffect, useState } from "react";
 import FilterSortControls from "./Components/FilterSortControls";
 import TagList from "./Components/TagList";
-import { Box, CircularProgress, Alert, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchData } from "./redux/dataSlice";
-// import PageItemNum from "./Components/Inputs/PageItemNum";
+
 function App() {
   const dispatch = useDispatch();
   const items = useSelector((state) => state.data.items);
+  const hasMore = useSelector((state) => state.data.hasMore);
   const status = useSelector((state) => state.data.status);
   const error = useSelector((state) => state.data.error);
-  const hasMore = useSelector((state) => state.data.hasMore);
-
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
 
   const [inname, setInname] = useState("");
-  const [dateRange, setDateRange] = useState({ fromDate: null, toDate: null });
+  const [fromDate, setFromDate] = useState(null);
+  const [toDate, setToDate] = useState(null);
   const [sortBy, setSortBy] = useState("popular");
   const [order, setOrder] = useState("desc");
   const [min, setMin] = useState(null);
   const [max, setMax] = useState(null);
 
+  const dateToUnixTimestamp = (date) => {
+    return date instanceof Date ? Math.floor(date.getTime() / 1000) : null;
+  };
+
   const handleSearch = () => {
     const searchParams = {
-      fromDate: dateRange.fromDate,
-      toDate: dateRange.toDate,
+      fromDate: dateToUnixTimestamp(fromDate),
+      toDate: dateToUnixTimestamp(toDate),
       order: order,
       min: min,
       max: max,
@@ -44,19 +48,11 @@ function App() {
     handleSearch();
   }, [page, pageSize]);
 
-  // if (status === "loading") {
-  //   return <CircularProgress />;
-  // }
-
-  // if (status === "failed") {
-  //   return <Alert severity="error">{error}</Alert>;
-  // }
   return (
     <Box
       sx={{
         display: "flex",
         alignItems: "flex-start",
-        backgroundColor: "#f5f5f5",
         flexDirection: "column",
         height: "100vh",
         marginX: {
@@ -73,8 +69,10 @@ function App() {
           handleSearch={handleSearch}
           inName={inname}
           setInname={setInname}
-          dateRange={dateRange}
-          setDateRange={setDateRange}
+          fromDate={fromDate}
+          setFromDate={setFromDate}
+          toDate={toDate}
+          setToDate={setToDate}
           sortBy={sortBy}
           setSortBy={setSortBy}
           order={order}
@@ -85,30 +83,7 @@ function App() {
           setMax={setMax}
         />
       </Box>
-      <Box
-        sx={{
-          width: "100%",
-          display: "flex",
-          justifyContent: "space-between",
-        }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            mt: 2,
-            mx: 2,
-            mb: 1,
-            width: "100%",
-            justifyContent: "space-between",
-          }}
-        >
-          <Box sx={{ display: "flex" }}>
-            {status === "loading" && <CircularProgress />}
-            {error && <Alert severity="error">{error}</Alert>}
-          </Box>
-          {/* <PageItemNum pageSize={pageSize} setPageSize={setPageSize} /> */}
-        </Box>
-      </Box>
+
       <TagList
         items={items}
         page={page}
@@ -116,6 +91,8 @@ function App() {
         pageSize={pageSize}
         setPageSize={setPageSize}
         hasMore={hasMore}
+        error={error}
+        status={status}
       />
     </Box>
   );

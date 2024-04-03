@@ -1,12 +1,47 @@
-import React from "react";
-import { Box, Pagination, Grid, ListItem, ListItemText } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import {
+  Box,
+  Pagination,
+  Grid,
+  ListItem,
+  ListItemText,
+  CircularProgress,
+  Alert,
+} from "@mui/material";
 import PageItemNum from "./Inputs/PageItemNum";
 import randomColor from "randomcolor";
 
-const TagList = ({ items, page, setPage, pageSize, setPageSize, hasMore }) => {
+const TagList = ({
+  items,
+  page,
+  setPage,
+  pageSize,
+  setPageSize,
+  hasMore,
+  error,
+  status,
+}) => {
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [colors, setColors] = useState([]);
+
   const handleChange = (event, value) => {
     setPage(value);
   };
+
+  useEffect(() => {
+    if (status === "succeeded") {
+      setShowSuccess(true);
+      const timeoutId = setTimeout(() => {
+        setShowSuccess(false);
+      }, 5000);
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [status]);
+
+  useEffect(() => {
+    setColors(items.map(() => randomColor({ luminosity: "light" })));
+  }, [items]);
 
   return (
     <Box
@@ -25,10 +60,17 @@ const TagList = ({ items, page, setPage, pageSize, setPageSize, hasMore }) => {
           sx={{
             width: "100%",
             display: "flex",
-            mb: 2,
-            justifyContent: "flex-end",
+            my: 2,
+            justifyContent: "space-between",
           }}
         >
+          <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+            {status === "loading" && <CircularProgress />}
+            {showSuccess && (
+              <Alert severity="success">Operation successful</Alert>
+            )}
+            {error && <Alert severity="error">{error}</Alert>}
+          </Box>
           <PageItemNum pageSize={pageSize} setPageSize={setPageSize} />
         </Box>
         {/* item list */}
@@ -42,7 +84,7 @@ const TagList = ({ items, page, setPage, pageSize, setPageSize, hasMore }) => {
                   display: "inline-flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  backgroundColor: randomColor({ luminosity: "light" }),
+                  backgroundColor: colors[index],
                   color: "#333",
                   fontWeight: "bold",
                   fontSize: "0.875rem",
@@ -64,7 +106,6 @@ const TagList = ({ items, page, setPage, pageSize, setPageSize, hasMore }) => {
 
       {/* Pagination */}
       <Pagination
-        // count={Math.ceil(data.length / pageItems)}
         count={hasMore ? page + 1 : page}
         color="primary"
         sx={{ mt: 2, alignSelf: "center" }}

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Pagination, Box } from "@mui/material";
+import { Pagination } from "@mui/material";
 
 export default {
   title: "Paggination",
   tags: ["autodocs"],
   parameters: {
+    layout: "centered",
     docs: {
       description: {
         component: "This is a component for displaying pagination controls.",
@@ -29,24 +30,13 @@ const Template = (args) => {
   }, [args.page]);
 
   return (
-    <Box
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      height="100%"
-      width="100%"
-      position="absolute"
-      top="0"
-      left="0"
-    >
-      <Pagination
-        count={hasMore ? page + 1 : page}
-        color="primary"
-        sx={{ mt: 2 }}
-        onChange={handleChange}
-        page={page}
-      />
-    </Box>
+    <Pagination
+      count={hasMore ? page + 1 : page}
+      color="primary"
+      sx={{ mt: 2 }}
+      onChange={handleChange}
+      page={page}
+    />
   );
 };
 

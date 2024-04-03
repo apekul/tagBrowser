@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, TextField, Button, Paper } from "@mui/material";
+import { Grid, TextField, Button, Paper } from "@mui/material";
 
 // Input Components
 import DateRangeInput from "./Inputs/DateRangeInput";
@@ -9,46 +9,50 @@ import MinMaxCount from "./Inputs/MinMaxCount";
 
 const FilterSortControls = ({ ...props }) => {
   return (
-    <Paper elevation={3} sx={{ p: 2, borderRadius: 2 }}>
-      <Box sx={{ display: "flex", flexDirection: "column" }}>
-        {/* Text input, SortBy, OrderBy */}
-        <Box sx={{ display: "flex", gap: 1 }}>
-          <Box sx={{ flex: 1, p: 1 }}>
-            <TextField
-              value={props.inname}
-              onChange={(e) => props.setInname(e.target.value)}
-              id="outlined-basic"
-              label="inname"
-              variant="outlined"
-              fullWidth
-            />
-          </Box>
-          {/* Date Range, Range count Slider */}
-          <DateRangeInput setDateRange={props.setDateRange} />
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            gap: 2,
-            pl: 1,
-            py: 1,
-          }}
-        >
+    <Paper elevation={3} sx={{ mt: 2, p: 2, borderRadius: 2 }}>
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            value={props.inname}
+            onChange={(e) => props.setInname(e.target.value)}
+            id="outlined-basic"
+            label="inname"
+            variant="outlined"
+            fullWidth
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <DateRangeInput
+            fromDate={props.fromDate}
+            setFromDate={props.setFromDate}
+            toDate={props.toDate}
+            setToDate={props.setToDate}
+          />
+        </Grid>
+        <Grid item xs={12} sm={2}>
           <Sort setSortBy={props.setSortBy} sortBy={props.sortBy} />
+        </Grid>
+        <Grid item xs={12} sm={2}>
           <Order setOrder={props.setOrder} order={props.order} />
+        </Grid>
+        <Grid item xs={12} sm={4}>
           <MinMaxCount
             min={props.min}
             setMin={props.setMin}
             max={props.max}
             setMax={props.setMax}
           />
-        </Box>
-
-        {/* Search button */}
-        <Button variant="contained" sx={{ mt: 2 }} onClick={props.handleSearch}>
-          Search
-        </Button>
-      </Box>
+        </Grid>
+        <Grid item xs={12} sm={4}>
+          <Button
+            variant="contained"
+            sx={{ width: "100%", height: "100%" }}
+            onClick={props.handleSearch}
+          >
+            Search
+          </Button>
+        </Grid>
+      </Grid>
     </Paper>
   );
 };

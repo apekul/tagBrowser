@@ -6,7 +6,7 @@ const Sort = ({ setSortBy, sortBy }) => {
     setSortBy(event.target.value);
   };
   return (
-    <Box sx={{ minWidth: 140 }}>
+    <Box>
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Sort by</InputLabel>
         <Select

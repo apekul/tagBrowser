@@ -6,7 +6,7 @@ const Order = ({ order, setOrder }) => {
     setOrder(event.target.value);
   };
   return (
-    <Box sx={{ minWidth: 120 }}>
+    <Box>
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Order</InputLabel>
         <Select

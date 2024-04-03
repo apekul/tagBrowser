@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Box } from "@mui/material";
 import PageItemNum from "../Components/Inputs/PageItemNum";
 
 export default {
@@ -7,6 +6,7 @@ export default {
   component: PageItemNum,
   tags: ["autodocs"],
   parameters: {
+    layout: "centered",
     docs: {
       description: {
         component:
@@ -32,20 +32,7 @@ const Template = (args) => {
     setPageSize(args.pageSize);
   }, [args.pageSize]);
 
-  return (
-    <Box
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      height="100%"
-      width="100%"
-      position="absolute"
-      top="0"
-      left="0"
-    >
-      <PageItemNum pageSize={pageSize} setPageSize={setPageSize} />
-    </Box>
-  );
+  return <PageItemNum pageSize={pageSize} setPageSize={setPageSize} />;
 };
 
 export const Default = Template.bind({});
