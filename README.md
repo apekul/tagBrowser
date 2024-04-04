@@ -16,6 +16,7 @@ React app for searching and navigating tags with pagination. It handles various 
 - React
 - Storybook
 - Material-UI
+- Node v21.7.2
 
 ## Usage
 
